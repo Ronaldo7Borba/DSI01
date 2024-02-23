@@ -1,0 +1,91 @@
+using System;
+using System.Globalization;
+
+class Produto
+{
+    private string _nome;
+    private double _preco;
+
+    public double Quantidade { get; private set; }
+
+    public Produto()
+    {
+    }
+
+    public Produto(string nome, double preco, double quantidade)
+    {
+        _nome = nome;
+        _preco = preco;
+        Quantidade = quantidade;
+    }
+
+    public string Nome
+    {
+        get { return _nome; }
+        set
+        {
+            if (value != null && value.Length > 1)
+            {
+                _nome = value;
+            }
+        }
+    }
+
+    public double Preco
+    {
+        get { return _preco; }
+        set
+        {
+            if (value > 0)
+            {
+                _preco = value;
+            }
+        }
+    }
+
+    public double ValorTotalEmEstoque => Preco * Quantidade;
+
+    public void AdicionarProdutos(double quantidade)
+    {
+        Quantidade += quantidade;
+    }
+
+    public void RemoverProdutos(double quantidade)
+    {
+        if (quantidade <= Quantidade)
+        {
+            Quantidade -= quantidade;
+        }
+        else
+        {
+            Console.WriteLine("Quantidade a ser removida excede a quantidade em estoque.");
+        }
+    }
+
+    public override string ToString()
+    {
+        return _nome
+            + ", $ "
+            + _preco.ToString("F2", CultureInfo.InvariantCulture)
+            + ", "
+            + Quantidade
+            + " unidades, Total: $ "
+            + ValorTotalEmEstoque.ToString("F2", CultureInfo.InvariantCulture);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Produto produto = new Produto("TV", 500.00, 10);
+
+        Console.WriteLine(produto);
+
+        produto.AdicionarProdutos(5);
+        Console.WriteLine("Após adicionar 5 unidades: " + produto);
+
+        produto.RemoverProdutos(3);
+        Console.WriteLine("Após remover 3 unidades: " + produto);
+    }
+}
