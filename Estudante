@@ -1,0 +1,13 @@
+class Estudante
+{
+public string nome {get; set;}
+public string email {get; set;}
+public estudante(string nome, string email) 
+  {
+   public override string To String()
+    {
+      retun nome + "," +email;
+    }
+  
+  }
+}
