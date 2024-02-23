@@ -1,0 +1,82 @@
+using System;
+
+class Carro
+{
+    // Atributos
+    private string marca;
+    private string modelo;
+    private int velocidade;
+    private bool motorLigado;
+
+    // Construtor
+    public Carro(string marca, string modelo)
+    {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.velocidade = 0;
+        this.motorLigado = false;
+    }
+
+    // Métodos
+    public void Ligar()
+    {
+        if (!motorLigado)
+        {
+            motorLigado = true;
+            Console.WriteLine("O motor foi ligado.");
+        }
+        else
+        {
+            Console.WriteLine("O motor já está ligado.");
+        }
+    }
+
+    public void Acelerar(int velocidadeAumento)
+    {
+        if (motorLigado)
+        {
+            velocidade += velocidadeAumento;
+            Console.WriteLine($"Velocidade aumentada para {velocidade} km/h.");
+        }
+        else
+        {
+            Console.WriteLine("Não é possível acelerar. O motor está desligado.");
+        }
+    }
+
+    public void Frear(int velocidadeDiminuicao)
+    {
+        if (motorLigado)
+        {
+            if (velocidade >= velocidadeDiminuicao)
+            {
+                velocidade -= velocidadeDiminuicao;
+                Console.WriteLine($"Velocidade reduzida para {velocidade} km/h.");
+            }
+            else
+            {
+                Console.WriteLine("Você não pode reduzir a velocidade para menos que 0 km/h.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Não é possível frear. O motor está desligado.");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Exemplo de uso
+        Carro carro = new Carro("Toyota", "Corolla");
+        Console.WriteLine($"Marca: {carro.Marca}, Modelo: {carro.Modelo}");
+
+        carro.Ligar();
+        carro.Acelerar(50);
+        carro.Frear(20);
+        carro.Frear(40);
+        carro.Frear(10);
+    }
+}
