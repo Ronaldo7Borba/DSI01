@@ -1,0 +1,66 @@
+using System;
+
+class Pessoa
+{
+    // Atributos
+    private string nome;
+    private int idade;
+    private double altura;
+
+    // Construtor
+    public Pessoa(string nome, int idade, double altura)
+    {
+        this.nome = nome;
+        this.idade = idade;
+        this.altura = altura;
+    }
+
+    // Métodos
+    public void Cumprimentar()
+    {
+        Console.WriteLine($"Olá! Meu nome é {nome}.");
+    }
+
+    public void FazerAniversario()
+    {
+        idade++;
+        Console.WriteLine($"Feliz aniversário! Agora eu tenho {idade} anos.");
+    }
+
+    public void Crescer(double aumentoAltura)
+    {
+        altura += aumentoAltura;
+        Console.WriteLine($"Cresci {aumentoAltura} metros! Minha altura agora é {altura} metros.");
+    }
+
+    // Propriedades para acesso aos atributos (opcional)
+    public string Nome
+    {
+        get { return nome; }
+        set { nome = value; }
+    }
+
+    public int Idade
+    {
+        get { return idade; }
+        set { idade = value; }
+    }
+
+    public double Altura
+    {
+        get { return altura; }
+        set { altura = value; }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Exemplo de uso
+        Pessoa pessoa = new Pessoa("João", 25, 1.75);
+        pessoa.Cumprimentar();
+        pessoa.FazerAniversario();
+        pessoa.Crescer(0.1);
+    }
+}
