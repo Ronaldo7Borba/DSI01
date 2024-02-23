@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+
+class Funcionario
+{
+    public int Id { get; }
+    public string Nome { get; }
+    private double _salario;
+
+    public Funcionario(int id, string nome, double salario)
+    {
+        Id = id;
+        Nome = nome;
+        _salario = salario;
+    }
+
+    public void AumentarSalario(double percentual)
+    {
+        _salario += _salario * percentual / 100.0;
+    }
+
+    public override string ToString()
+    {
+        return $"{Id}, {Nome}, {_salario:F2}";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Quantos funcionários serão registrados? ");
+        int n = int.Parse(Console.ReadLine());
+
+        List<Funcionario> funcionarios = new List<Funcionario>();
+
+        for (int i = 1; i <= n; i++)
+        {
+            Console.WriteLine($"Func #{i}:");
+            Console.Write("Id: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+            Console.Write("Salário: ");
+            double salario = double.Parse(Console.ReadLine());
+            funcionarios.Add(new Funcionario(id, nome, salario));
+        }
+
+        Console.Write("Entre com o ID de quem receberá o reajuste: ");
+        int idReajuste = int.Parse(Console.ReadLine());
+
+        Funcionario func = funcionarios.Find(x => x.Id == idReajuste);
+
+        if (func != null)
+        {
+            Console.Write("Entre com a porcentagem: ");
+            double porcentagem = double.Parse(Console.ReadLine());
+            func.AumentarSalario(porcentagem);
+        }
+        else
+        {
+            Console.WriteLine("Este ID não existe");
+        }
+
+        Console.WriteLine("\nLista atualizada:");
+        foreach (Funcionario f in funcionarios)
+        {
+            Console.WriteLine(f);
+        }
+    }
+}
